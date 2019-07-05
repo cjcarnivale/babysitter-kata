@@ -21,10 +21,10 @@ const { expect } = require('chai');
 
 describe('Hour Calculator', () => {
   it('should throw an error if all arguments aren\'t present', () => {
-    expect(() => hourCalculator('5:00', '9:00')).to.throw('Must enter start time, end time, and bed time');   
+    expect(() => hourCalculator('5:00 p.m.', '9:00 p.m.')).to.throw('Must enter start time, end time, and bed time');   
   });
 
   it('should throw an error if start time is earlier than 5:00 p.m.', () => {
-    expect(() => hourCalculator('4:00', '10:00', '9:00')).to.throw('Start time must be 5:00 p.m. or later');
+    expect(() => hourCalculator('4:00 p.m.', '10:00 p.m.', '9:00 p.m.')).to.throw('Start time must be 5:00 p.m. or later');
   });
 });
