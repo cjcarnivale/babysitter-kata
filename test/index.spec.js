@@ -9,5 +9,11 @@
 
 'use strict'; 
 
+const hourCalculator = require('../index'); 
 const { expect } = require('chai'); 
 
+describe('Hour Calculator', () => {
+  it('should throw an error if all arguments aren\'t present', () => {
+    expect(() => hourCalculator('5:00', '9:00')).to.throw('Must enter start time, end time, and bed time');   
+  });
+});
