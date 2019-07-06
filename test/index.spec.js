@@ -27,4 +27,9 @@ describe('Hour Calculator', () => {
   it('should throw an error if start time is earlier than 5:00 p.m.', () => {
     expect(() => hourCalculator('4:00 p.m.', '10:00 p.m.', '9:00 p.m.')).to.throw('Start time must be 5:00 p.m. or later');
   });
+
+  it('should throw an error if end time is later than 4:00 a.m.', () => {
+    expect(() => hourCalculator('6:00 p.m.', '5:00 a.m.', '9:00 p.m.')).to.throw('End time must be 4:00 a.m. or earlier'); 
+  }); 
+
 });
