@@ -49,5 +49,8 @@ describe('Hour Calculator', () => {
     expect(() => hourCalculator('5:00 p.m.', '4:00 a.m.', '1:00 a.m.')).to.throw('Bed time must be before midnight'); 
   });
 
+  it('should return the correct amount between start time and bed time', () => {
+    expect(hourCalculator('5:00 p.m.', '11:00 p.m.', '9:00 p.m.')).to.equal(48); 
+  })
 
 });

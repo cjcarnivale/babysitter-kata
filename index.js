@@ -26,8 +26,8 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
   } else if (endHour <= 23 && endHour > 4 && startHour > endHour){
     throw new Error('Start time must be before end time'); 
   }
-
-  if (bedHour >= 0 || bedHour < 17) {
+ 
+  if (bedHour >= 0 && bedHour < 17) {
     throw new Error('Bed time must be before midnight'); 
   }
 
