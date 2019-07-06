@@ -17,6 +17,9 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
     throw new Error('End time must be 4:00 a.m. or earlier'); 
   }
 
+  //Rounds to the next hour for end time, assuming that if one minute in an hour is worked, 
+  //they get credit for the entire hour
+
   function convertEndTimeMinutes(time){
     let hour = convertToMilitary(time);
     if (!time.includes('00')){
@@ -25,11 +28,16 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
     return hour; 
   }
 
+  //Converts times to military time
   function convertToMilitary(time){
     let hour = parseInt(time.split(':')[0]);
     if (time.split(' ')[1] === 'p.m.'){
       hour += 12;
     }
+    if (hour === 12){
+      hour = 0;
+    }
+
     return hour; 
   }
 
