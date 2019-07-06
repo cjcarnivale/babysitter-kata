@@ -11,6 +11,7 @@
 Assumptions: 
 1.  If babysitter starts 1 minute or greater into a new hour, they get credit for the whole hour. 
 2.  Bed time gets rounded to the next whole hour.
+3.  Bed time can not be after midnight.
 */
 
 'use strict'; 
