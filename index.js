@@ -1,16 +1,16 @@
 'use strict'; 
 
 module.exports = function hourCalculator(startTime, endTime, bedTime) {
-
-  let startHour = convertToMilitary(startTime);
-  let endHour = convertEndTimeMinutes(endTime); 
-
-  if (!bedTime) {
+  if (!startTime || !endTime || !bedTime) {
     throw new Error('Must enter start time, end time, and bed time'); 
   }
+  
+  let startHour = convertToMilitary(startTime);
+  let endHour = convertEndTimeMinutes(endTime);
+  let bedHour = convertEndTimeMinutes(bedTime); 
 
-  if (startHour > 23 || endHour > 23){
-    throw new Error('Start time and end time must be valid times')
+  if (startHour > 23 || endHour > 23 || bedHour > 23){
+    throw new Error('Start time, end time, and bed time must be valid times'); 
   }
 
   if (startHour < 17 && startHour > 4){
@@ -21,8 +21,10 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
     throw new Error('End time must be 4:00 a.m. or earlier'); 
   }
 
-  if (startHour > endHour || (startHour < 4 && endHour > 17)) {
+  if (startHour < 4 && endHour > 17) {
     throw new Error('Start time must be before end time');
+  } else if (endHour <= 23 && endHour > 4 && startHour > endHour){
+    throw new Error('Start time must be before end time'); 
   }
 
 

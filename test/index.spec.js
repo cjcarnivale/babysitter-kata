@@ -10,6 +10,7 @@
 /*
 Assumptions: 
 1.  If babysitter starts 1 minute or greater into a new hour, they get credit for the whole hour. 
+2.  Bed time gets rounded to the next whole hour.
 */
 
 'use strict'; 
@@ -38,8 +39,9 @@ describe('Hour Calculator', () => {
   });
 
   it('should throw an error if start time or end time are invalid', () => {
-    expect(() => hourCalculator('14:00 p.m.', '9:00 p.m.', '9:00 p.m.')).to.throw('Start time and end time must be valid times');
-    expect(() => hourCalculator('9:00 p.m.', '23:00 p.m.', '9:00 p.m.')).to.throw('Start time and end time must be valid times');
+    expect(() => hourCalculator('14:00 p.m.', '9:00 p.m.', '9:00 p.m.')).to.throw('Start time, end time, and bed time must be valid times');
+    expect(() => hourCalculator('9:00 p.m.', '23:00 p.m.', '9:00 p.m.')).to.throw('Start time, end time, and bed time must be valid times');
+    expect(() => hourCalculator('9:00 p.m.', '10:00 p.m.', '21:00 p.m.')).to.throw('Start time, end time, and bed time must be valid times');
   });
 
   it('should throw an error if bed time is after midnight', () => {
