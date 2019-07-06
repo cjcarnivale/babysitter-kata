@@ -40,7 +40,11 @@ describe('Hour Calculator', () => {
   it('should throw an error if start time or end time are invalid', () => {
     expect(() => hourCalculator('14:00 p.m.', '9:00 p.m.', '9:00 p.m.')).to.throw('Start time and end time must be valid times');
     expect(() => hourCalculator('9:00 p.m.', '23:00 p.m.', '9:00 p.m.')).to.throw('Start time and end time must be valid times');
-  })
+  });
+
+  it('should throw an error if bed time is after midnight', () => {
+    expect(() => hourCalculator('5:00 p.m.', '4:00 a.m.', '1:00 a.m.')).to.throw('Bed time must be before midnight'); 
+  });
 
 
 });
