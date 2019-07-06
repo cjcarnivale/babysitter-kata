@@ -48,9 +48,12 @@ describe('Hour Calculator', () => {
   it('should throw an error if bed time is after midnight', () => {
     expect(() => hourCalculator('5:00 p.m.', '4:00 a.m.', '1:00 a.m.')).to.throw('Bed time must be before midnight'); 
   });
-
-  it('should return the correct amount between start time and bed time', () => {
-    expect(hourCalculator('5:00 p.m.', '11:00 p.m.', '9:00 p.m.')).to.equal(48); 
-  })
-
 });
+
+describe('Before Bed Pay', () => {
+  it('should return the correct amount between start time and bed time', () => {
+    expect(hourCalculator('5:00 p.m.', '11:00 p.m.', '9:00 p.m.')).to.equal(48);
+    expect(hourCalculator('5:00 p.m.', '8:00 p.m.', '9:00 p.m.')).to.equal(36);
+    expect(hourCalculator('9:00 p.m.', '10:00 p.m.', '8:00 p.m.')).to.equal(0);
+  });
+}); 

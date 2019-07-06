@@ -7,7 +7,9 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
   
   let startHour = convertToMilitary(startTime);
   let endHour = convertEndTimeMinutes(endTime);
-  let bedHour = convertEndTimeMinutes(bedTime); 
+  let bedHour = convertEndTimeMinutes(bedTime);
+  let totalHours = totalTime(startHour, endHour);
+  let remainingHours = 0;  
 
   if (startHour > 23 || endHour > 23 || bedHour > 23){
     throw new Error('Start time, end time, and bed time must be valid times'); 
@@ -55,4 +57,28 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
     return hour; 
   }
 
+  //Calculates total time worked
+  function totalTime(startTime, endTime){
+    if (startTime < 17){
+      startTime += 24;
+    }
+    if (endTime < 17){
+      endTime += 24;
+    }
+
+    return endTime - startTime; 
+  }
+
+  function beforeBedPay(){
+    let startHours = bedHour - startHour;
+    if (startHour < bedHour && totalHours > startHours){
+      remainingHours = totalHours - startHours;
+      return(startHours * 12); 
+    } else if(totalHours < startHours){
+      return totalHours * 12; 
+    } else {
+      return 0;
+    }
+  }
+  return beforeBedPay(); 
 }; 
