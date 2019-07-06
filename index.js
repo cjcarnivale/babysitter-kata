@@ -17,6 +17,11 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
     throw new Error('End time must be 4:00 a.m. or earlier'); 
   }
 
+  if (startHour > endHour || (startHour < 4 && endHour > 17)) {
+    throw new Error('Start time must be before end time');
+  }
+
+
   //Rounds to the next hour for end time, assuming that if one minute in an hour is worked, 
   //they get credit for the entire hour
 
