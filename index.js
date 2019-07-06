@@ -9,6 +9,10 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
     throw new Error('Must enter start time, end time, and bed time'); 
   }
 
+  if (startHour > 23 || endHour > 23){
+    throw new Error('Start time and end time must be valid times')
+  }
+
   if (startHour < 17 && startHour > 4){
     throw new Error('Start time must be 5:00 p.m. or later');
   }
@@ -36,10 +40,10 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
   //Converts times to military time
   function convertToMilitary(time){
     let hour = parseInt(time.split(':')[0]);
-    if (time.split(' ')[1] === 'p.m.'){
+    if (time.split(' ')[1] === 'p.m.' && hour !== 12){
       hour += 12;
     }
-    if (hour === 12){
+    if (time.split(' ')[1] === 'a.m.' && hour === 12 ){
       hour = 0;
     }
 
