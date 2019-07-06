@@ -9,9 +9,7 @@
 
 /*
 Assumptions: 
-1. a.m. and p.m. are unnecceary for the arguments because there is no overlap. Therefore, anything before 5:00
-  for the start time and anything after 4:00 for the end time should throw an error.
-
+1.  If babysitter starts 1 minute or greater into a new hour, they get credit for the whole hour. 
 */
 
 'use strict'; 
@@ -26,10 +24,12 @@ describe('Hour Calculator', () => {
 
   it('should throw an error if start time is earlier than 5:00 p.m.', () => {
     expect(() => hourCalculator('4:00 p.m.', '10:00 p.m.', '9:00 p.m.')).to.throw('Start time must be 5:00 p.m. or later');
+    expect(() => hourCalculator('5:00 a.m.', '10:00 p.m.', '9:00 p.m.')).to.throw('Start time must be 5:00 p.m. or later'); 
   });
 
   it('should throw an error if end time is later than 4:00 a.m.', () => {
     expect(() => hourCalculator('6:00 p.m.', '5:00 a.m.', '9:00 p.m.')).to.throw('End time must be 4:00 a.m. or earlier'); 
+    expect(() => hourCalculator('6:00 p.m.', '1:00 p.m.', '9:00 p.m.')).to.throw('End time must be 4:00 a.m. or earlier');
   }); 
 
 });
