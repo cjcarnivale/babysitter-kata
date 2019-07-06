@@ -66,3 +66,9 @@ describe('Bed Pay', () => {
     expect(hourCalculator('12:00 a.m.', '3:00 a.m.', '9:00 p.m.')).to.equal(0);
   });
 });
+
+describe('After Midnight Pay', () => {
+  it('should return the correct amount after midnight', () => {
+    expect(hourCalculator('5:00 p.m.', '11:00 p.m.', '4:00 a.m.')).to.equal(132);
+  }); 
+});
