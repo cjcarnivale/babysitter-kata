@@ -12,6 +12,8 @@ Assumptions:
 1.  If babysitter starts 1 minute or greater into a new hour, they get credit for the whole hour. 
 2.  Bed time gets rounded to the next whole hour.
 3.  Bed time can not be after midnight.
+4.  Validated hour and a.m./p.m. as these are most important to the calculation.  Did not validate minutes and only used them to round.
+5.  Input format will always be hh:mm a.m./p.m. ParseInt will return the same value for '04' and '4'. 
 */
 
 'use strict';
