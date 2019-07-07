@@ -83,14 +83,30 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
 
   function bedPay(){
     let bedHours = 24 - bedHour; 
-    if (startHour < bedHour && remainingHours >= bedHours){
+    if (startHour <= bedHour && remainingHours >= bedHours){
       remainingHours -= bedHours;
-      return bedHours * 8; 
-    } else if (remainingHours < bedHours){
+      return bedHours * 8;
+    } else if (remainingHours < bedHours && remainingHours !== 0){
       return remainingHours * 8;
     } else {
       return 0; 
     }
   }
-  return (beforeBedPay() + bedPay()); 
+
+  function afterMidnightPay(){
+    console.log(bedPay());
+    if (endHour > 0 && endHour <=4 && startHour >= 17){
+      return endHour * 16;
+    } else if (startHour < 4 && remainingHours !== 0){
+      return remainingHours * 16;
+    }
+    else if (startHour < 4 && endHour < 4){
+      return (endHour - startHour) * 16; 
+    }
+    else {
+      return 0;
+    }
+  }
+
+  return (beforeBedPay() + bedPay() + afterMidnightPay()); 
 }; 
