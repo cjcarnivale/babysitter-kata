@@ -9,7 +9,7 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
   let endHour = convertEndTimeMinutes(endTime);
   let bedHour = convertEndTimeMinutes(bedTime);
   let payStartHour = convertPayHours(startHour);
-  let payEndhour = convertPayHours(endHour); 
+  let payEndHour = convertPayHours(endHour); 
 
   if (startHour > 23 || endHour > 23 || bedHour > 23){
     throw new Error('Start time, end time, and bed time must be valid times'); 
@@ -57,23 +57,59 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
     return hour; 
   }
 
+  //Adds 24 hours to times after midnight for pay calculations
   function convertPayHours(time){
     if (time < 5){
-      return time + 24;
-    }
-    return time; 
+      let newTime = time + 24; 
+      return newTime; 
+    } else {
+      return time;
+    } 
   }
 
   function beforeBedPay(){
-
+    //Outside time frame
+    if (payStartHour > bedHour){
+      return 0;
+    //Both start time and end time within before bed hours
+    } else if (payEndHour < bedHour){
+      return ((payEndHour - payStartHour) * 12); 
+    //Regular calculation
+    } else{ 
+      return ((bedHour - payStartHour) * 12);
+    }
   }
 
   function bedPay(){
-
+    //Outside time frame
+    if (payStartHour >= 24 || payEndHour <= bedHour){
+      return 0;
+    //Both start time and end time within bed time hours  
+    } else if (payStartHour >= bedHour && payEndHour <= 24) {
+      return ((payEndHour - payStartHour) * 8);
+    //Start time before bed time, end time within bed time hours
+    } else if (payStartHour < bedHour && payEndHour <= 24){
+      return ((payEndHour - bedHour) * 8);
+      //Start time within bed time hours, end time after bed time hours
+    } else if (payStartHour >= bedHour && payEndHour > 24){
+      return ((24 - payStartHour) * 8);
+      //Both start time and end time outside of bed time hours
+    }else {
+      return ((24 - bedHour) * 8); 
+    }
   }
 
   function afterMidnightPay(){
-
+    //Outside time frame
+    if (payEndHour < 24){
+      return 0;
+    //Both start time and end time within after midnight hours
+    } else if (payStartHour >= 24 && payEndHour < 28){
+      return ((payEndHour - payStartHour) * 16);
+    //Regular calculation
+    } else {
+      return ((payEndHour - 24) * 16); 
+    }
   }
 
   return (beforeBedPay() + bedPay() + afterMidnightPay()); 

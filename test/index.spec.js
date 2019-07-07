@@ -50,31 +50,33 @@ describe('Hour Calculator', () => {
   });
 
   it('should return the correct amount for a complete night of work', () => {
-    expect(() => hourCalculator('5:59 p.m.', '3:01 a.m.', '9:59 p.m.')).to.equal(140);
+    expect(hourCalculator('5:59 p.m.', '3:01 a.m.', '9:59 p.m.')).to.equal(140);
   });
 });
 
 describe('Before Bed Pay', () => {
   it('should return the correct amount between start time and bed time', () => {
-    expect(hourCalculator('5:00 p.m.', '9:00 p.m.', '9:00 p.m.')).to.equal(48);
+    expect(hourCalculator('9:00 p.m.', '10:00 p.m.', '8:00 p.m.')).to.equal(8);
     expect(hourCalculator('5:00 p.m.', '8:00 p.m.', '9:00 p.m.')).to.equal(36);
-    expect(hourCalculator('9:00 p.m.', '10:00 p.m.', '8:00 p.m.')).to.equal(0);
+    expect(hourCalculator('5:00 p.m.', '10:00 p.m.', '9:00 p.m.')).to.equal(56);
   });
 }); 
 
 
 describe('Bed Pay', () => {
   it('should return the correct amount between bed time and midnight', () => {
-    expect(hourCalculator('6:00 p.m.', '12:00 a.m.', '9:00 p.m.')).to.equal(60); 
-    expect(hourCalculator('6:00 p.m.', '11:00 p.m.', '9:00 p.m.')).to.equal(52);
     expect(hourCalculator('12:00 a.m.', '3:00 a.m.', '9:00 p.m.')).to.equal(48);
+    expect(hourCalculator('10:00 p.m.', '11:00 p.m.', '9:00 p.m.')).to.equal(8);
+    expect(hourCalculator('6:00 p.m.', '11:00 p.m.', '9:00 p.m.')).to.equal(52);
+    expect(hourCalculator('10:00 p.m.', '1:00 a.m.', '9:00 p.m.')).to.equal(32); 
+    expect(hourCalculator('6:00 p.m.', '1:00 a.m.', '9:00 p.m.')).to.equal(76); 
   });
 });
 
 describe('After Midnight Pay', () => {
   it('should return the correct amount after midnight', () => {
-    expect(hourCalculator('1:00 a.m.', '3:00 a.m.', '11:00 p.m.')).to.equal(32);
-    expect(hourCalculator('9:00 p.m.', '4:00 a.m.', '9:00 p.m.')).to.equal(100);
     expect(hourCalculator('5:00 p.m.', '11:00 p.m.', '9:00 p.m.')).to.equal(64);
+    expect(hourCalculator('1:00 a.m.', '3:00 a.m.', '11:00 p.m.')).to.equal(32);
+    expect(hourCalculator('9:00 p.m.', '4:00 a.m.', '9:00 p.m.')).to.equal(88);
   }); 
 });
