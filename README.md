@@ -1,7 +1,7 @@
 # Babysitter Kata
 
 ## Requirements
-[Original Link](https://gist.github.com/jameskbride/5482722)
+[Original Gist for Kata](https://gist.github.com/jameskbride/5482722)
 
 Background
 ----------
