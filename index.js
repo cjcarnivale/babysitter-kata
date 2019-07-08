@@ -23,14 +23,8 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
   if (endHour > 4 && endHour < 18) {
     throw new Error('End time must be 4:00 a.m. or earlier');
   }
-  //If start hour is after midnight, and end hour is before, start hour is greater than end hour
-  if (startHour < 4 && endHour > 17) {
-    throw new Error('Start time must be before end time');
-  //If end hour is before midnight, and start hour is greater than end hour
-  } else if (endHour <= 23 && endHour > 4 && startHour > endHour) {
-    throw new Error('Start time must be before end time');
-  //If both start hour and end hour are after midnight and start hour is greater than end hour
-  } else if (endHour <= 4 && startHour <= 3 && startHour > endHour){
+
+  if (payStartHour > payEndHour) {
     throw new Error('Start time must be before end time');
   }
 
