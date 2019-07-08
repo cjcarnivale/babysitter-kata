@@ -1,6 +1,11 @@
 # Babysitter Kata
 
 ## Requirements
+[Original Link](https://gist.github.com/jameskbride/5482722)
+
+Background
+----------
+This kata simulates a babysitter working and getting paid for one night.  The rules are pretty straight forward:
 
 The babysitter 
 - starts no earlier than 5:00PM
@@ -9,6 +14,12 @@ The babysitter
 - gets paid $8/hour from bedtime to midnight
 - gets paid $16/hour from midnight to end of job
 - gets paid for full hours (no fractional hours)
+
+
+Feature:
+As a babysitter
+In order to get paid for 1 night of work
+I want to calculate my nightly charge
 
 
 ## Assumptions
@@ -24,10 +35,10 @@ The babysitter
 2.  A library that handles time could be used for time conversions.
 
 ## Tech Used
-Node 11.10.1
-NPM 6.7.0
-Mocha
-Chai
+- Node 11.10.1
+- NPM 6.7.0
+- Mocha
+- Chai
 
 ## Set-up instructions:
 1. Clone repo to local machine
