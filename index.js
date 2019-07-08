@@ -29,7 +29,7 @@ module.exports = function hourCalculator(startTime, endTime, bedTime) {
   }
 
   if (bedHour >= 0 && bedHour < 17) {
-    throw new Error('Bed time must be before midnight');
+    throw new Error('Bed time must be before midnight and after 5:00 p.m.');
   }
 
   //Rounds to the next hour for end time, assuming that if one minute in an hour is worked,

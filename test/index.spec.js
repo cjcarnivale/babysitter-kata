@@ -8,6 +8,12 @@ describe('Hour Calculator', () => {
     expect(() => hourCalculator('5:00 p.m.', '9:00 p.m.')).to.throw(
       'Must enter start time, end time, and bed time'
     );
+    expect(() => hourCalculator('5:00 p.m.')).to.throw(
+      'Must enter start time, end time, and bed time'
+    );
+    expect(() => hourCalculator()).to.throw(
+      'Must enter start time, end time, and bed time'
+    );
   });
 
   it('should throw an error if start time is earlier than 5:00 p.m.', () => {
@@ -52,10 +58,13 @@ describe('Hour Calculator', () => {
     ).to.throw('Start time, end time, and bed time must be valid times');
   });
 
-  it('should throw an error if bed time is after midnight', () => {
+  it('should throw an error if bed time is after midnight or before 5:00 p.m.', () => {
     expect(() =>
       hourCalculator('5:00 p.m.', '4:00 a.m.', '1:00 a.m.')
-    ).to.throw('Bed time must be before midnight');
+    ).to.throw('Bed time must be before midnight and after 5:00 p.m.');
+    expect(() =>
+      hourCalculator('5:00 p.m.', '4:00 a.m.', '1:00 p.m.')
+    ).to.throw('Bed time must be before midnight and after 5:00 p.m.');
   });
 
   it('should return the correct amount for a complete night of work', () => {
