@@ -1,21 +1,3 @@
-/* The babysitter 
-- starts no earlier than 5:00PM
-- leaves no later than 4:00AM
-- gets paid $12/hour from start-time to bedtime
-- gets paid $8/hour from bedtime to midnight
-- gets paid $16/hour from midnight to end of job
-- gets paid for full hours (no fractional hours)
-*/
-
-/*
-Assumptions: 
-1.  If babysitter starts 1 minute or greater into a new hour, they get credit for the whole hour. 
-2.  Bed time gets rounded to the next whole hour.
-3.  Bed time can not be after midnight.
-4.  Validated hour and a.m./p.m. as these are most important to the calculation.  Did not validate minutes and only used them to round.
-5.  Input format will always be hh:mm a.m./p.m. ParseInt will return the same value for '04' and '4'. 
-*/
-
 'use strict';
 
 const hourCalculator = require('../index');
@@ -53,7 +35,9 @@ describe('Hour Calculator', () => {
     expect(() =>
       hourCalculator('10:00 p.m.', '8:45 p.m.', '9:00 p.m.')
     ).to.throw('Start time must be before end time');
-    expect(() => hourCalculator('2:00 a.m.', '1:00 a.m.', '9:00 p.m.')).to.throw('Start time must be before end time'); 
+    expect(() =>
+      hourCalculator('2:00 a.m.', '1:00 a.m.', '9:00 p.m.')
+    ).to.throw('Start time must be before end time');
   });
 
   it('should throw an error if start time or end time are invalid', () => {
